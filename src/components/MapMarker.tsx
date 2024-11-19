@@ -1,7 +1,7 @@
 import React from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import { LatLngExpression, Icon } from 'leaflet';
-import { OccurrenceDB } from './types';
+import { OccurrenceDB } from '../types/occurrence';
 
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';

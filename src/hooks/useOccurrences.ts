@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { OccurrenceDB } from './types';
-import { getOccurrences } from './api';
+import { OccurrenceDB } from '../types/occurrence';
+import { getOccurrences } from '../services/api';
 
 export const useOccurrences = () => {
     const [occurrences, setOccurrences] = useState<OccurrenceDB[]>([]);

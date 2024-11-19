@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { OccurrenceDB } from './types';
+import { OccurrenceDB } from '../types/occurrence';
 
 const api = axios.create({
     baseURL: process.env.REACT_APP_API_URL || 'http://192.168.15.181:3001'

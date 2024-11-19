@@ -8,8 +8,8 @@ import {
 } from 'lucide-react';
 
 
-import { useOccurrences } from './useOccurrences';
-import { MapMarker } from './MapMarker';
+import { useOccurrences } from './hooks/useOccurrences';
+import { MapMarker } from './components/MapMarker';
 
 const Dashboard: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
