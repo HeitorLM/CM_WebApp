@@ -5,16 +5,19 @@ React App:
     ☐ Adicionar lógica de switch dos markers e heatmap
     ☐ Importar funções do webapp antigo:
         - Verificar funcionamento do darkmode
-        - Adicionar persistêncai do darkmode e dos markers
+        - Adicionar persistência do darkmode e dos markers
 
     ☐ Adicionar UI para recuperar occs de acordo com timestamp
     - Verificar se é possível recuperar usando o unix timestamp
         - Ou se é necessário conversão dos valores no banco de dados
-    - Modificar UI após requisição na API
-    - Criar método para recuperar dados do DB conforme intervalo
+    ☐ Modificar UI após requisição na API
+    ☐ Criar método para recuperar dados do DB conforme intervalo
+
+    ☐ Criar retângulo das locations
 
 
 
 Back-end:
-    ☐ Integração com os APIs de users e locations
-    ☐ Implementar leitura do .env
+    ✔ Integração com as APIs de users e locations @done(24-11-21 11:52)
+        - Atualizar dados na UI
+    ✔ Implementar leitura do .env @done(24-11-21 11:59)
