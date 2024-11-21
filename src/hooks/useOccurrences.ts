@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { OccurrenceDB } from '../types/occurrence';
+import { OccurrenceDB } from '../types';
 import { getOccurrences } from '../services/api';
 
 export const useOccurrences = () => {
