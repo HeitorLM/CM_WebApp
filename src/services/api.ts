@@ -2,7 +2,7 @@ import axios from 'axios';
 import { OccurrenceDB, LocationDB, UsersEntity } from '../types';
 
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3001'
+    baseURL: process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_URL_PORT}` : 'http://localhost:3001'
 });
 
 export const getOccurrences = async (): Promise<OccurrenceDB[]> => {
