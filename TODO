@@ -1,8 +1,8 @@
 React App:
     ☐ Verificar CSS
         - Switch não muda de cor
-    ☐ Adicionar heatmap
-    ☐ Adicionar lógica de switch dos markers e heatmap
+    ✔ Adicionar heatmap @done(24-11-27 00:21)
+    ✔ Adicionar lógica de switch dos markers e heatmap @done(24-11-27 00:21)
     ☐ Importar funções do webapp antigo:
         - Verificar funcionamento do darkmode
         - Adicionar persistência do darkmode e dos markers
@@ -13,7 +13,7 @@ React App:
     ☐ Modificar UI após requisição na API
     ☐ Criar método para recuperar dados do DB conforme intervalo
 
-    ☐ Criar retângulo das locations
+    ✔ Criar retângulo das locations @done(24-11-27 00:22)
 
 
 
