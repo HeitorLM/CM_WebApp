@@ -34,6 +34,9 @@ export const MapHeatmap: React.FC<HeatMapProps> = ({ occurrences }) => {
             {...{
                 blur: 15,
                 radius: 25,
+                maxZoom: 15,        // Zoom máximo onde o heatmap será renderizado
+                max: 1.0,           // Valor máximo de intensidade
+                minOpacity: 0.3,    // Opacidade mínima para pontos de baixa intensidade
             }}
         />
     );
