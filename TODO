@@ -10,7 +10,7 @@ React App:
     ☐ Adicionar UI para recuperar occs de acordo com timestamp
     - Verificar se é possível recuperar usando o unix timestamp
         - Ou se é necessário conversão dos valores no banco de dados
-    ☐ Modificar UI após requisição na API
+    ✔ Modificar UI após requisição na API @done(24-11-27 00:44)
     ☐ Criar método para recuperar dados do DB conforme intervalo
 
     ✔ Criar retângulo das locations @done(24-11-27 00:22)
@@ -19,5 +19,5 @@ React App:
 
 Back-end:
     ✔ Integração com as APIs de users e locations @done(24-11-21 11:52)
-        - Atualizar dados na UI
+        ✔ Atualizar dados na UI @done(24-11-27 00:44)
     ✔ Implementar leitura do .env @done(24-11-21 11:59)
