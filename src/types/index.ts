@@ -18,7 +18,7 @@ export interface OccurrenceDB {
     wazeData: string;
     locLatitude?: number | null;
     locLongitude?: number | null;
-    pubMillis: number;
+    timeStamp: number;
 }
 export interface LocationDB {
     locationId: number;
