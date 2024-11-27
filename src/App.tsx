@@ -13,6 +13,8 @@ import { MapMarker } from './components/MapMarker';
 
 import { MapHeatmap } from './components/Heatmap';
 
+import { RectangleMap } from './components/RectangleMap';
+
 const Dashboard: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeInterval, setActiveInterval] = useState('12h');
@@ -26,7 +28,7 @@ const Dashboard: React.FC = () => {
   const intervals = ['1h', '3h', '12h', '1d', '3d', '1sem', 'custom'];
 
   // Fetch
-  const { occurrences, isLoading, error } = useOccurrences();
+  const { occurrences, locations, users, isLoading, error } = useOccurrences();
 
   if (error) {
     return <div>Erro: {error}</div>;
@@ -125,6 +127,10 @@ const Dashboard: React.FC = () => {
             ))} */}
             {<MapHeatmap
               occurrences={occurrences}
+            />}
+
+            {<RectangleMap
+              locations={locations}
             />}
           </MapContainer>
         </div>
