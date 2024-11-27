@@ -30,6 +30,9 @@ const Dashboard: React.FC = () => {
   // Fetch
   const { occurrences, locations, users, isLoading, error } = useOccurrences();
 
+  const avgReliability = (occurrences.reduce((acc, curr) =>
+    acc + curr.reliability, 0) / occurrences.length).toFixed(1);
+
   if (error) {
     return <div>Erro: {error}</div>;
   }
@@ -67,19 +70,19 @@ const Dashboard: React.FC = () => {
       <div className="stats-grid">
         <div className="stat-card">
           <h3>Total de Ocorrências</h3>
-          <div className="value">--</div>
+          <div className="value">{occurrences ? occurrences.length : "--"}</div>
         </div>
         <div className="stat-card">
           <h3>Total de Localizações</h3>
-          <div className="value">--</div>
+          <div className="value">{locations ? locations.length : "--"}</div>
         </div>
         <div className="stat-card">
           <h3>Média de Confiabilidade</h3>
-          <div className="value">--</div>
+          <div className="value">{occurrences ? avgReliability : "--"}</div>
         </div>
         <div className="stat-card">
           <h3>Usuários Ativos</h3>
-          <div className="value">--</div>
+          <div className="value">{users ? users.length : "--"}</div>
         </div>
 
         <div className="button-group">
