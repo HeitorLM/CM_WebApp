@@ -119,19 +119,19 @@ const Dashboard: React.FC = () => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {/* {occurrences.map((occurrence) => (
+
+            <RectangleMap
+              locations={locations}
+            />
+
+            {isHeatmap ? (<MapHeatmap
+              occurrences={occurrences}
+            />) : (occurrences.map((occurrence) => (
               <MapMarker
                 key={occurrence.occId}
                 occurrence={occurrence}
               />
-            ))} */}
-            {<MapHeatmap
-              occurrences={occurrences}
-            />}
-
-            {<RectangleMap
-              locations={locations}
-            />}
+            )))}
           </MapContainer>
         </div>
       </div>
