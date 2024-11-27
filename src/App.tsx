@@ -11,6 +11,8 @@ import {
 import { useOccurrences } from './hooks/useOccurrences';
 import { MapMarker } from './components/MapMarker';
 
+import { MapHeatmap } from './components/Heatmap';
+
 const Dashboard: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeInterval, setActiveInterval] = useState('12h');
@@ -107,20 +109,23 @@ const Dashboard: React.FC = () => {
 
         <div style={{ height: '100vh', width: '100%' }}>
           <MapContainer
-            center={[-23.55052, -46.633308]}
-            zoom={5}
+            center={[-22.862065, -47.0528789]}
+            zoom={12}
             style={{ height: '100%', width: '100%' }}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            {occurrences.map((occurrence) => (
+            {/* {occurrences.map((occurrence) => (
               <MapMarker
                 key={occurrence.occId}
                 occurrence={occurrence}
               />
-            ))}
+            ))} */}
+            {<MapHeatmap
+              occurrences={occurrences}
+            />}
           </MapContainer>
         </div>
       </div>
