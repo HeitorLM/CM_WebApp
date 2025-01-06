@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
@@ -16,13 +16,20 @@ import { MapHeatmap } from './components/Heatmap';
 import { RectangleMap } from './components/RectangleMap';
 
 const Dashboard: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [activeInterval, setActiveInterval] = useState('12h');
-  const [isHeatmap, setIsHeatmap] = useState(false);
+  const [isHeatmap, setIsHeatmap] = useState(true);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle('dark', !isDarkMode);
   };
 
   const intervals = ['1h', '3h', '12h', '1d', '3d', '1sem', 'custom'];
@@ -42,7 +49,7 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className={`container ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`container ${isDarkMode ? 'dark' : 'light'}`}>
       <div className="header">
         <h1>Dashboard de Ocorrências</h1>
         <p>Visualização em tempo real de ocorrências e localizações</p>
@@ -61,8 +68,8 @@ const Dashboard: React.FC = () => {
             onClick={toggleTheme}
             className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-full"
           >
-            {isDarkMode ? <SunIcon /> : <MoonIcon />}
-            <span>{isDarkMode ? 'Tema Claro' : 'Tema Escuro'}</span>
+            {isDarkMode ? <MoonIcon /> : <SunIcon />}
+            <span>{isDarkMode ? 'Tema Escuro' : 'Tema Claro'}</span>
           </button>
         </div>
       </div>
