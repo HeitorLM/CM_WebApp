@@ -16,9 +16,15 @@ import { MapHeatmap } from './components/Heatmap';
 import { RectangleMap } from './components/RectangleMap';
 
 const Dashboard: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('isDarkMode');
+    return savedTheme ? JSON.parse(savedTheme) : true;
+  });
   const [activeInterval, setActiveInterval] = useState('12h');
-  const [isHeatmap, setIsHeatmap] = useState(true);
+  const [isHeatmap, setIsHeatmap] = useState(() => {
+    const savedView = localStorage.getItem('isHeatmap');
+    return savedView ? JSON.parse(savedView) : true;
+  });
 
   useEffect(() => {
     if (isDarkMode) {
@@ -26,7 +32,12 @@ const Dashboard: React.FC = () => {
     } else {
       document.documentElement.classList.remove('dark');
     }
+    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
+
+  useEffect(() => {
+    localStorage.setItem('isHeatmap', JSON.stringify(isHeatmap));
+  }, [isHeatmap]);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
