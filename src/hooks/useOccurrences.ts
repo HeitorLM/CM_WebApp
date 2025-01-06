@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { OccurrenceDB, LocationDB, UsersEntity } from '../types';
 import { getOccurrences, getLocations, getUsers } from '../services/api';
 
@@ -9,29 +9,47 @@ export const useOccurrences = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchOccurrences = async () => {
+    const fetchOccurrences = useCallback(async () => {
         try {
             setIsLoading(true);
             setError(null);
-            const data = await getOccurrences();
-            setOccurrences(data);
-
-            const data2 = await getLocations();
-            setLocations(data2);
-
-            const data3 = await getUsers();
-            setUsers(data3);
+            const [occurrencesData, locationsData, usersData] = await Promise.all([
+                getOccurrences(),
+                getLocations(),
+                getUsers()
+            ]);
+            setOccurrences(occurrencesData);
+            setLocations(locationsData);
+            setUsers(usersData);
         } catch (err) {
             console.error('Erro no hook:', err);
             setError('Não foi possível carregar as ocorrências');
         } finally {
             setIsLoading(false);
         }
-    };
+    }, []);
+
+    const updateData = useCallback(async () => {
+        try {
+            const [occurrencesData, locationsData, usersData] = await Promise.all([
+                getOccurrences(),
+                getLocations(),
+                getUsers()
+            ]);
+            setOccurrences(occurrencesData);
+            setLocations(locationsData);
+            setUsers(usersData);
+        } catch (err) {
+            console.error('Erro no hook:', err);
+            setError('Não foi possível atualizar as ocorrências');
+        }
+    }, []);
 
     useEffect(() => {
         fetchOccurrences();
-    }, []);
+        const interval = setInterval(updateData, 10 * 60 * 1000); // 10 minutos
+        return () => clearInterval(interval);
+    }, [fetchOccurrences, updateData]);
 
     return { occurrences, locations, users, isLoading, error, refetch: fetchOccurrences };
 };
