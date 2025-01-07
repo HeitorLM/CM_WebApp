@@ -117,20 +117,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="relative">
-        <div className="view-switch absolute z-[1000] top-2 right-2 flex items-center space-x-2">
-          <span>Markers</span>
-          <label className="toggle-switch">
-            <input
-              type="checkbox"
-              checked={isHeatmap}
-              onChange={() => setIsHeatmap(!isHeatmap)}
-            />
-            <span className="slider"></span>
-          </label>
-          <span>Heatmap</span>
-        </div>
-
-        <div style={{ height: '100vh', width: '100%' }}>
+        <div style={{ height: '600px', width: '100%' }}>
           <MapContainer
             center={[-22.862065, -47.0528789]}
             zoom={12}
@@ -144,6 +131,21 @@ const Dashboard: React.FC = () => {
             <RectangleMap
               locations={locations}
             />
+
+            <div className="leaflet-top leaflet-right">
+              <div className="view-switch leaflet-control">
+                <span>Markers</span>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={isHeatmap}
+                    onChange={() => setIsHeatmap(!isHeatmap)}
+                  />
+                  <span className="slider"></span>
+                </label>
+                <span>Heatmap</span>
+              </div>
+            </div>
 
             {isHeatmap ? (<MapHeatmap
               occurrences={occurrences}
