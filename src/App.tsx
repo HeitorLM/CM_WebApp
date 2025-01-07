@@ -118,7 +118,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="relative">
-        <div style={{ height: '100vh', width: '100%' }}>
+        <div style={{ height: '600px', width: '100%' }}>
           <MapContainer
             center={[-22.862065, -47.0528789]}
             zoom={12}
