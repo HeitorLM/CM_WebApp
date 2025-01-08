@@ -5,11 +5,13 @@ const api = axios.create({
     baseURL: process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}:${process.env.REACT_APP_API_URL_PORT}` : 'http://localhost:3001'
 });
 
-export const getOccurrences = async (): Promise<OccurrenceDB[]> => {
+export const getOccurrences = async (interval?: string): Promise<OccurrenceDB[]> => {
     try {
-        const { data } = await api.get<OccurrenceDB[]>('/occs');
+        const { data } = await api.get<OccurrenceDB[]>('/occs', {
+            params: { interval }
+        });
 
-        // Adicionar log de diagnóstico
+        // Adicionar log de diagnósticoxs
         // console.log('Dados recebidos:', data);
         // console.log('Número de ocorrências:', data.length);
 

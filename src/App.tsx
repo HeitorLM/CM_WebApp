@@ -46,7 +46,17 @@ const Dashboard: React.FC = () => {
   const intervals = ['1h', '3h', '12h', '1d', '3d', '1sem', 'custom'];
 
   // Fetch
-  const { occurrences, locations, users, isLoading, error } = useOccurrences();
+  const { occurrences, locations, users, isLoading, error, fetchOccurrencesByInterval, updateDataByInterval } = useOccurrences();
+
+  useEffect(() => {
+    const interval = setInterval(() => updateDataByInterval(activeInterval), 10 * 60 * 1000); // 10 minutos
+    return () => clearInterval(interval);
+  }, [activeInterval, updateDataByInterval]);
+
+  const handleIntervalClick = (interval: string) => {
+    setActiveInterval(interval);
+    fetchOccurrencesByInterval(interval);
+  };
 
   const avgReliability = (occurrences.reduce((acc, curr) =>
     acc + curr.reliability, 0) / occurrences.length).toFixed(1);
@@ -108,8 +118,7 @@ const Dashboard: React.FC = () => {
             <button
               key={interval}
               className={activeInterval === interval ? 'selected' : ''}
-              disabled={true}
-              onClick={() => setActiveInterval(interval)}
+              onClick={() => handleIntervalClick(interval)}
             >
               {interval}
             </button>

@@ -29,10 +29,22 @@ export const useOccurrences = () => {
         }
     }, []);
 
-    const updateData = useCallback(async () => {
+    const fetchOccurrencesByInterval = useCallback(async (interval: string) => {
+        try {
+            const [occurrencesData] = await Promise.all([
+                getOccurrences(interval)
+            ]);
+            setOccurrences(occurrencesData);
+        } catch (err) {
+            console.error('Erro no hook:', err);
+            setError('Não foi possível carregar as ocorrências');
+        }
+    }, []);
+    
+    const updateDataByInterval = useCallback(async (interval: string) => {
         try {
             const [occurrencesData, locationsData, usersData] = await Promise.all([
-                getOccurrences(),
+                getOccurrences(interval),
                 getLocations(),
                 getUsers()
             ]);
@@ -47,9 +59,9 @@ export const useOccurrences = () => {
 
     useEffect(() => {
         fetchOccurrences();
-        const interval = setInterval(updateData, 10 * 60 * 1000); // 10 minutos
+        const interval = setInterval(() => updateDataByInterval('12h'), 10 * 60 * 1000); // 10 minutos
         return () => clearInterval(interval);
-    }, [fetchOccurrences, updateData]);
+    }, [fetchOccurrences, updateDataByInterval]);
 
-    return { occurrences, locations, users, isLoading, error, refetch: fetchOccurrences };
+    return { occurrences, locations, users, isLoading, error, refetch: fetchOccurrences, fetchOccurrencesByInterval, updateDataByInterval };
 };
