@@ -1,18 +1,24 @@
 React App:
-    ☐ Verificar CSS
-        - Switch não muda de cor
+    ☐ Implementar aba de relatórios
+        - Adicionar gráficos de barras
+        - Adicionar gráficos de linha
+        - Adicionar gráficos de pizza
+
+
+    ✔ Verificar CSS @done(25-01-08 04:03)
+        ✔ Switch não muda de cor @done(25-01-08 04:03)
     ✔ Adicionar heatmap @done(24-11-27 00:21)
     ✔ Adicionar lógica de switch dos markers e heatmap @done(24-11-27 00:21)
-    ☐ Importar funções do webapp antigo:
-        - Verificar funcionamento do darkmode
+    ✔ Importar funções do webapp antigo: @done(25-01-08 04:03)
+        ✔ Verificar funcionamento do darkmode @done(25-01-08 04:03)
         ✔ Adicionar persistência do darkmode e dos markers @done(25-01-06 02:22)
 
-    ☐ Adicionar UI para recuperar occs de acordo com timestamp
-    - Verificar se é possível recuperar usando o unix timestamp
-        - Ou se é necessário conversão dos valores no banco de dados
+    ✔ Adicionar UI para recuperar occs de acordo com timestamp @done(25-01-08 04:03)
+    ✔ Verificar se é possível recuperar usando o unix timestamp @done(25-01-08 04:03)
+        ✔ Ou se é necessário conversão dos valores no banco de dados @done(25-01-08 04:03)
     ✔ Modificar UI após requisição na API @done(24-11-27 00:44)
     ✔ Criar método para recuperar dados do DB @done(25-01-06 02:16)
-        - Conforme intervalo de tempo
+        ✔ Conforme intervalo de tempo @done(25-01-08 04:03)
 
     ✔ Criar retângulo das locations @done(24-11-27 00:22)
 
