@@ -59,9 +59,7 @@ export const useOccurrences = () => {
 
     useEffect(() => {
         fetchOccurrences();
-        const interval = setInterval(() => updateDataByInterval('12h'), 10 * 60 * 1000); // 10 minutos
-        return () => clearInterval(interval);
-    }, [fetchOccurrences, updateDataByInterval]);
+    }, [fetchOccurrences]);
 
     return { occurrences, locations, users, isLoading, error, refetch: fetchOccurrences, fetchOccurrencesByInterval, updateDataByInterval };
 };
