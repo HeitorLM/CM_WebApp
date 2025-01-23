@@ -111,7 +111,7 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="stat-card">
           <h3>Usuários Ativos</h3>
-          <div className="value">{users ? users.length : "--"}</div>
+          <div className="value">{users ? users : "--"}</div>
         </div>
 
         <div className="button-group">

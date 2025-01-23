@@ -32,9 +32,9 @@ export const getLocations = async (): Promise<LocationDB[]> => {
     }
 };
 
-export const getUsers = async (): Promise<UsersEntity[]> => {
+export const getUsers = async (): Promise<number> => {
     try {
-        const { data } = await api.get<UsersEntity[]>('/users');
+        const { data } = await api.get<number>('/users');
 
         return data;
     } catch (error) {

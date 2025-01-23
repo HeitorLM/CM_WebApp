@@ -5,7 +5,7 @@ import { getOccurrences, getLocations, getUsers } from '../services/api';
 export const useOccurrences = () => {
     const [occurrences, setOccurrences] = useState<OccurrenceDB[]>([]);
     const [locations, setLocations] = useState<LocationDB[]>([]);
-    const [users, setUsers] = useState<UsersEntity[]>([]);
+    const [users, setUsers] = useState<number>(0);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
