@@ -1,11 +1,22 @@
 React App:
-    ☐ Implementar aba de relatórios
-        - Adicionar gráficos de barras
-        - Adicionar gráficos de linha
-        - Adicionar gráficos de pizza
+    ✔ Implementar aba de relatórios @done(25-07-16 19:08)
+        ✔ Adicionar gráficos de barras @done(25-07-16 19:08)
+        ✔ Adicionar gráficos de linha @done(25-07-16 19:08)
+        ✔ Adicionar gráficos de pizza @done(25-07-16 19:08)
+
+        - TO FIX:
+            - Top 10 Ocorrências Mais Curtidas
+             - Remover type e explicitar rua
+
+            - Ocorrências por Hora do Dia
+             - Remover texto duplicado
+
+            - Ocorrências por Dia da Semana
+             - Remover texto duplicado
+             - Explicitar porcentagem corretamente
 
 
-        - Remover CRA e implementar Vite
+        ✔ Remover CRA e implementar Vite @done(25-07-16 19:06)
 
     ✔ Verificar CSS @done(25-01-08 04:03)
         ✔ Switch não muda de cor @done(25-01-08 04:03)
