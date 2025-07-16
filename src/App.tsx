@@ -7,13 +7,13 @@ import {
   Bot as BotIcon
 } from 'lucide-react';
 
-
 import { useOccurrences } from './hooks/useOccurrences';
 import { MapMarker } from './components/MapMarker';
 
 import { MapHeatmap } from './components/Heatmap';
 
 import { RectangleMap } from './components/RectangleMap';
+import { AnalysisCharts } from './components/AnalysisCharts';
 
 const Dashboard: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -25,6 +25,7 @@ const Dashboard: React.FC = () => {
     const savedView = localStorage.getItem('isHeatmap');
     return savedView ? JSON.parse(savedView) : true;
   });
+  const [activeTab, setActiveTab] = useState('map'); // Novo estado para alternar entre abas
 
   useEffect(() => {
     if (isDarkMode) {
@@ -121,47 +122,72 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="relative">
-        <div style={{ height: '600px', width: '100%' }}>
-          <MapContainer
-            center={[-22.862065, -47.0528789]}
-            zoom={12}
-            style={{ height: '100%', width: '100%' }}
+      <div className="tab-pane">
+        <div className="tab-buttons">
+          <button
+            className={activeTab === 'map' ? 'selected' : ''}
+            onClick={() => setActiveTab('map')}
           >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-
-            <RectangleMap
-              locations={locations}
-            />
-
-            <div className="leaflet-top leaflet-right">
-              <div className="view-switch leaflet-control">
-                <span>Markers</span>
-                <label className="toggle-switch">
-                  <input
-                    type="checkbox"
-                    checked={isHeatmap}
-                    onChange={() => setIsHeatmap(!isHeatmap)}
-                  />
-                  <span className="slider"></span>
-                </label>
-                <span>Heatmap</span>
-              </div>
-            </div>
-
-            {isHeatmap ? (<MapHeatmap
-              occurrences={occurrences}
-            />) : (occurrences.map((occurrence) => (
-              <MapMarker
-                key={occurrence.occId}
-                occurrence={occurrence}
-              />
-            )))}
-          </MapContainer>
+            Mapa
+          </button>
+          <button
+            className={activeTab === 'charts' ? 'selected' : ''}
+            onClick={() => setActiveTab('charts')}
+          >
+            Gráficos
+          </button>
         </div>
+
+        {activeTab === 'map' && (
+          <div className="relative">
+            <div style={{ height: '600px', width: '100%' }}>
+              <MapContainer
+                center={[-22.862065, -47.0528789]}
+                zoom={12}
+                style={{ height: '100%', width: '100%' }}
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+
+                <RectangleMap
+                  locations={locations}
+                />
+
+                <div className="leaflet-top leaflet-right">
+                  <div className="view-switch leaflet-control">
+                    <span>Markers</span>
+                    <label className="toggle-switch">
+                      <input
+                        type="checkbox"
+                        checked={isHeatmap}
+                        onChange={() => setIsHeatmap(!isHeatmap)}
+                      />
+                      <span className="slider"></span>
+                    </label>
+                    <span>Heatmap</span>
+                  </div>
+                </div>
+
+                {isHeatmap ? (<MapHeatmap
+                  occurrences={occurrences}
+                />) : (occurrences.map((occurrence) => (
+                  <MapMarker
+                    key={occurrence.occId}
+                    occurrence={occurrence}
+                  />
+                )))}
+              </MapContainer>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'charts' && (
+          <div className="charts-container">
+            <AnalysisCharts occurrences={occurrences} />
+          </div>
+        )}
       </div>
     </div>
   );
