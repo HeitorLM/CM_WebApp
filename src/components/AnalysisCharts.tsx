@@ -106,8 +106,6 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
 
     return (
         <div style={{ padding: '20px' }}>
-            <Title level={2}>Análise de Dados de Ocorrências</Title>
-
             {/* Seção 1: Top 10 Ocorrências Mais Curtidas */}
             <Card
                 title="Top 10 Ocorrências Mais Curtidas"
