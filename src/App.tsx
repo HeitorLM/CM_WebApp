@@ -79,6 +79,7 @@ const Dashboard: React.FC = () => {
             className="p-2 hover:bg-gray-100 rounded-full"
           >
             <BotIcon />
+            <span>Bot</span>
           </a>
 
           <button
