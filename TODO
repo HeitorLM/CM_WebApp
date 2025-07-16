@@ -5,6 +5,8 @@ React App:
         - Adicionar gráficos de pizza
 
 
+        - Remover CRA e implementar Vite
+
     ✔ Verificar CSS @done(25-01-08 04:03)
         ✔ Switch não muda de cor @done(25-01-08 04:03)
     ✔ Adicionar heatmap @done(24-11-27 00:21)
