@@ -39,10 +39,10 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
         .sort((a, b) => (b.nThumbsUp || 0) - (a.nThumbsUp || 0))
         .slice(0, 10)
         .map(occ => ({
-            name: `${occ.type} - ${occ.city || 'N/A'}`,
+            name: `${occ.city || 'N/A'}`,
             thumbsUp: occ.nThumbsUp || 0,
             street: occ.street || 'Rua não informada',
-            fullLabel: `${occ.type} (${occ.city || 'N/A'}) - ${occ.street || 'Rua não informada'}`
+            fullLabel: `${occ.street || 'Rua não informada'}`
         }));
 
     // 2. Distribuição de Confiabilidade e Confiança
