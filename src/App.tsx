@@ -138,56 +138,60 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
 
-        {activeTab === 'map' && (
-          <div className="relative">
-            <div style={{ height: '600px', width: '100%' }}>
-              <MapContainer
-                center={[-22.862065, -47.0528789]}
-                zoom={12}
-                style={{ height: '100%', width: '100%' }}
-              >
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-
-                <RectangleMap
-                  locations={locations}
-                />
-
-                <div className="leaflet-top leaflet-right">
-                  <div className="view-switch leaflet-control">
-                    <span>Markers</span>
-                    <label className="toggle-switch">
-                      <input
-                        type="checkbox"
-                        checked={isHeatmap}
-                        onChange={() => setIsHeatmap(!isHeatmap)}
-                      />
-                      <span className="slider"></span>
-                    </label>
-                    <span>Heatmap</span>
-                  </div>
-                </div>
-
-                {isHeatmap ? (<MapHeatmap
-                  occurrences={occurrences}
-                />) : (occurrences.map((occurrence) => (
-                  <MapMarker
-                    key={occurrence.occId}
-                    occurrence={occurrence}
+        <div style={{ transition: 'opacity 0.3s ease', opacity: activeTab === 'map' ? 1 : 0 }}>
+          {activeTab === 'map' && (
+            <div className="relative">
+              <div style={{ height: '600px', width: '100%' }}>
+                <MapContainer
+                  center={[-22.862065, -47.0528789]}
+                  zoom={12}
+                  style={{ height: '100%', width: '100%' }}
+                >
+                  <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   />
-                )))}
-              </MapContainer>
-            </div>
-          </div>
-        )}
 
-        {activeTab === 'charts' && (
-          <div className="charts-container">
-            <AnalysisCharts occurrences={occurrences} />
-          </div>
-        )}
+                  <RectangleMap
+                    locations={locations}
+                  />
+
+                  <div className="leaflet-top leaflet-right">
+                    <div className="view-switch leaflet-control">
+                      <span>Markers</span>
+                      <label className="toggle-switch">
+                        <input
+                          type="checkbox"
+                          checked={isHeatmap}
+                          onChange={() => setIsHeatmap(!isHeatmap)}
+                        />
+                        <span className="slider"></span>
+                      </label>
+                      <span>Heatmap</span>
+                    </div>
+                  </div>
+
+                  {isHeatmap ? (<MapHeatmap
+                    occurrences={occurrences}
+                  />) : (occurrences.map((occurrence) => (
+                    <MapMarker
+                      key={occurrence.occId}
+                      occurrence={occurrence}
+                    />
+                  )))}
+                </MapContainer>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div style={{ transition: 'opacity 0.3s ease', opacity: activeTab === 'charts' ? 1 : 0 }}>
+          {activeTab === 'charts' && (
+            <div className="charts-container">
+              <AnalysisCharts occurrences={occurrences} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
