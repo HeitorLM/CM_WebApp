@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
     const savedTheme = localStorage.getItem('isDarkMode');
     return savedTheme ? JSON.parse(savedTheme) : true;
   });
-  const [activeInterval, setActiveInterval] = useState('');
+  const [activeInterval, setActiveInterval] = useState('12h');
   const [isHeatmap, setIsHeatmap] = useState(() => {
     const savedView = localStorage.getItem('isHeatmap');
     return savedView ? JSON.parse(savedView) : true;
@@ -46,12 +46,7 @@ const Dashboard: React.FC = () => {
   const intervals = ['1h', '3h', '12h', '1d', '3d', '1sem', '1mes'];
 
   // Fetch
-  const { occurrences, locations, users, isLoading, error, fetchOccurrencesByInterval, updateDataByInterval } = useOccurrences();
-
-  useEffect(() => {
-    const interval = setInterval(() => updateDataByInterval(activeInterval), 10 * 60 * 1000); // 10 minutos
-    return () => clearInterval(interval);
-  }, [activeInterval, updateDataByInterval]);
+  const { occurrences, locations, users, isLoading, error, fetchOccurrencesByInterval } = useOccurrences();
 
   const handleIntervalClick = (interval: string) => {
     setActiveInterval(interval);
@@ -83,7 +78,6 @@ const Dashboard: React.FC = () => {
             className="p-2 hover:bg-gray-100 rounded-full"
           >
             <BotIcon />
-            <span>Bot</span>
           </a>
 
           <button
