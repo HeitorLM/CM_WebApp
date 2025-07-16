@@ -6,7 +6,8 @@ React App:
 
         - TO FIX:
             - Top 10 Ocorrências Mais Curtidas
-             - Remover type e explicitar rua
+             ✔ Remover type e explicitar rua @done(25-07-16 19:16)
+             - Verificar dados incorretos no tooltip
 
             - Ocorrências por Hora do Dia
              - Remover texto duplicado
@@ -14,6 +15,11 @@ React App:
             - Ocorrências por Dia da Semana
              - Remover texto duplicado
              - Explicitar porcentagem corretamente
+
+            - Arrumar CSS
+             - Arrumar as cores do component dos gráficos
+             ✔ Ajustar o tab pane @done(25-07-16 19:49)
+              - Deixar no estilo bootstrap (?)
 
 
         ✔ Remover CRA e implementar Vite @done(25-07-16 19:06)
