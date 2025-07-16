@@ -3,14 +3,15 @@ import React from 'react';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
     PieChart, Pie, Cell,
-    LineChart, Line, Area,
+    LineChart, Line, Area
 } from 'recharts';
-import { Card, Col, Row, Typography } from 'antd';
+import { Card, Col, Row, Statistic, Typography } from 'antd';
 import {
     SafetyOutlined,
     LikeOutlined,
     CalendarOutlined,
-    ClockCircleFilled
+    ClockCircleFilled,
+    EnvironmentOutlined
 } from '@ant-design/icons';
 import { OccurrenceDB } from '../types';
 
@@ -68,6 +69,40 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
             ).length;
             return { day, count: dayCount };
         });
+
+    // 7. Tendência Temporal (Série Temporal)
+    const timeSeriesData = React.useMemo(() => {
+        const dailyData = occurrences.reduce((acc, curr) => {
+            const date = new Date(curr.timeStamp).toISOString().split('T')[0];
+            if (!acc[date]) {
+                acc[date] = {
+                    date,
+                    count: 0,
+                    avgReliability: 0,
+                    totalThumbsUp: 0
+                };
+            }
+            acc[date].count++;
+            acc[date].avgReliability += curr.reliability;
+            acc[date].totalThumbsUp += curr.nThumbsUp || 0;
+            return acc;
+        }, {} as Record<string, { date: string; count: number; avgReliability: number; totalThumbsUp: number }>);
+
+        return Object.values(dailyData)
+            .map(item => ({
+                ...item,
+                avgReliability: item.avgReliability / item.count
+            }))
+            .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    }, [occurrences]);
+
+    // 10. Dashboard Resumo com KPIs
+    const summaryKPIs = {
+        totalOccurrences: occurrences.length,
+        avgReliability: occurrences.reduce((sum, occ) => sum + occ.reliability, 0) / occurrences.length,
+        totalThumbsUp: occurrences.reduce((sum, occ) => sum + (occ.nThumbsUp || 0), 0)
+    };
+
 
     return (
         <div style={{ padding: '20px' }}>
@@ -250,6 +285,70 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
                                 <Legend />
                             </PieChart>
                         </ResponsiveContainer>
+                    </Col>
+                </Row>
+            </Card>
+
+            {/* 7. Tendência Temporal */}
+            <Card title="Tendência Temporal" style={{ marginBottom: 24 }}>
+                <ResponsiveContainer width="100%" height={300}>
+                    <LineChart data={timeSeriesData}>
+                        <CartesianGrid strokeDasharray="3 3" />
+                        <XAxis dataKey="date" />
+                        <YAxis yAxisId="left" />
+                        <YAxis yAxisId="right" orientation="right" />
+                        <Tooltip />
+                        <Legend />
+                        <Line
+                            yAxisId="left"
+                            type="monotone"
+                            dataKey="count"
+                            stroke="#8884d8"
+                            name="Ocorrências"
+                            dot={{ r: 4 }}
+                            activeDot={{ r: 6 }}
+                        />
+                        <Line
+                            yAxisId="right"
+                            type="monotone"
+                            dataKey="avgReliability"
+                            stroke="#82ca9d"
+                            name="Confiabilidade Média"
+                            dot={{ r: 4 }}
+                        />
+                    </LineChart>
+                </ResponsiveContainer>
+            </Card>
+
+            {/* 10. Dashboard Resumo com KPIs */}
+            <Card title="Resumo Estatístico" style={{ marginBottom: 24 }}>
+                <Row gutter={16}>
+                    <Col span={6}>
+                        <Card>
+                            <Statistic
+                                title="Total de Ocorrências"
+                                value={summaryKPIs.totalOccurrences}
+                                prefix={<EnvironmentOutlined />}
+                            />
+                        </Card>
+                    </Col>
+                    <Col span={6}>
+                        <Card>
+                            <Statistic
+                                title="Confiabilidade Média"
+                                value={summaryKPIs.avgReliability.toFixed(2)}
+                                prefix={<SafetyOutlined />}
+                            />
+                        </Card>
+                    </Col>
+                    <Col span={6}>
+                        <Card>
+                            <Statistic
+                                title="Total de Curtidas"
+                                value={summaryKPIs.totalThumbsUp}
+                                prefix={<LikeOutlined />}
+                            />
+                        </Card>
                     </Col>
                 </Row>
             </Card>
