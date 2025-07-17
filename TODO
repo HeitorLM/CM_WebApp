@@ -16,6 +16,12 @@ React App:
              - Remover texto duplicado
              - Explicitar porcentagem corretamente
 
+            - Tendência Temporal
+             - Adicionar ícone
+
+            - Resumo estatístico
+             - Adicionar ícone
+
             - Arrumar CSS
              - Arrumar as cores do component dos gráficos
              ✔ Ajustar o tab pane @done(25-07-16 19:49)
