@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import {
@@ -26,6 +26,8 @@ const Dashboard: React.FC = () => {
     return savedView ? JSON.parse(savedView) : true;
   });
   const [activeTab, setActiveTab] = useState('map'); // Novo estado para alternar entre abas
+  const mapRef = useRef<HTMLDivElement>(null); // Referência para o mapa
+  const chartsRef = useRef<HTMLDivElement>(null); // Referência para os gráficos
 
   useEffect(() => {
     if (isDarkMode) {
@@ -127,71 +129,75 @@ const Dashboard: React.FC = () => {
         <div className="tab-buttons">
           <button
             className={activeTab === 'map' ? 'selected' : ''}
-            onClick={() => setActiveTab('map')}
+            onClick={() => {
+              setActiveTab('map');
+              if (chartsRef.current) chartsRef.current.style.display = 'none';
+              if (mapRef.current) mapRef.current.style.display = 'block';
+            }}
           >
             Mapa
           </button>
           <button
             className={activeTab === 'charts' ? 'selected' : ''}
-            onClick={() => setActiveTab('charts')}
+            onClick={() => {
+              setActiveTab('charts');
+              if (mapRef.current) mapRef.current.style.display = 'none';
+              if (chartsRef.current) chartsRef.current.style.display = 'block';
+            }}
           >
             Gráficos
           </button>
         </div>
 
-        <div style={{ transition: 'opacity 0.3s ease', opacity: activeTab === 'map' ? 1 : 0 }}>
-          {activeTab === 'map' && (
-            <div className="relative">
-              <div style={{ height: '600px', width: '100%' }}>
-                <MapContainer
-                  center={[-22.862065, -47.0528789]}
-                  zoom={12}
-                  style={{ height: '100%', width: '100%' }}
-                >
-                  <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  />
+        <div ref={mapRef} style={{ transition: 'opacity 0.3s ease', display: activeTab === 'map' ? 'block' : 'none' }}>
+          <div className="relative">
+            <div style={{ height: '600px', width: '100%' }}>
+              <MapContainer
+                center={[-22.862065, -47.0528789]}
+                zoom={12}
+                style={{ height: '100%', width: '100%' }}
+              >
+                <TileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
 
-                  <RectangleMap
-                    locations={locations}
-                  />
+                <RectangleMap
+                  locations={locations}
+                />
 
-                  <div className="leaflet-top leaflet-right">
-                    <div className="view-switch leaflet-control">
-                      <span>Markers</span>
-                      <label className="toggle-switch">
-                        <input
-                          type="checkbox"
-                          checked={isHeatmap}
-                          onChange={() => setIsHeatmap(!isHeatmap)}
-                        />
-                        <span className="slider"></span>
-                      </label>
-                      <span>Heatmap</span>
-                    </div>
+                <div className="leaflet-top leaflet-right">
+                  <div className="view-switch leaflet-control">
+                    <span>Markers</span>
+                    <label className="toggle-switch">
+                      <input
+                        type="checkbox"
+                        checked={isHeatmap}
+                        onChange={() => setIsHeatmap(!isHeatmap)}
+                      />
+                      <span className="slider"></span>
+                    </label>
+                    <span>Heatmap</span>
                   </div>
+                </div>
 
-                  {isHeatmap ? (<MapHeatmap
-                    occurrences={occurrences}
-                  />) : (occurrences.map((occurrence) => (
-                    <MapMarker
-                      key={occurrence.occId}
-                      occurrence={occurrence}
-                    />
-                  )))}
-                </MapContainer>
-              </div>
+                {isHeatmap ? (<MapHeatmap
+                  occurrences={occurrences}
+                />) : (occurrences.map((occurrence) => (
+                  <MapMarker
+                    key={occurrence.occId}
+                    occurrence={occurrence}
+                  />
+                )))}
+              </MapContainer>
             </div>
-          )}
+          </div>
         </div>
 
-        <div style={{ transition: 'opacity 0.3s ease', opacity: activeTab === 'charts' ? 1 : 0 }}>
-          {activeTab === 'charts' && (
-            <div className="charts-container">
-              <AnalysisCharts occurrences={occurrences} />
-            </div>
-          )}
+        <div ref={chartsRef} style={{ display: activeTab === 'charts' ? 'block' : 'none' }}>
+          <div className="charts-container">
+            <AnalysisCharts occurrences={occurrences} />
+          </div>
         </div>
       </div>
     </div>
