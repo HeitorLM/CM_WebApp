@@ -27,7 +27,10 @@ React App:
              ✔ Ajustar o tab pane @done(25-07-16 19:49)
               - Deixar no estilo bootstrap (?)
 
-
+        - Alterar README.md
+            - Adicionar instruções de como rodar o projeto
+            - Adicionar infos sobre o projeto
+            - Adicionar imagens do projeto
         ✔ Remover CRA e implementar Vite @done(25-07-16 19:06)
 
     ✔ Verificar CSS @done(25-01-08 04:03)
