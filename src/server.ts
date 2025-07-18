@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
-import dotenv from "dotenv"
+import * as dotenv from "dotenv";
 
 import { fileURLToPath } from 'url';
 
@@ -15,8 +15,8 @@ dotenv.config({
 
 
 const app = express();
-const BASE_URL = process.env.VITE_API_BASE_URL || "localhost";
-const PORT = process.env.VITE_API_PORT || 5000;
+const BASE_URL = process.env.VITE_EXPRESS_BASE_URL || "localhost";
+const PORT = process.env.VITE_EXPRESS_PORT || 5000;
 
 // Use CORS middleware
 app.use(cors());
