@@ -250,7 +250,9 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
                                 <CartesianGrid strokeDasharray="3 3" />
                                 <XAxis dataKey="day" />
                                 <YAxis />
-                                <Tooltip />
+                                <Tooltip
+                                    formatter={(value) => [`${value} ocorrências`, 'Quantidade']}
+                                />
                                 <Bar dataKey="count" fill="#8884d8" name="Ocorrências">
                                     {weekdayData.map((entry, index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -279,8 +281,8 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
                                 </Pie>
                                 <Tooltip
                                     formatter={(value, name, props) => [
-                                        value,
-                                        `${props.payload.day}\n${value} ocorrências (${(props.payload.percent * 100).toFixed(1)}%)`
+                                        `${value} ocorrências`,
+                                        `${props.payload.day} (${((props.payload.count / occurrences.length) * 100).toFixed(1)}%)`
                                     ]}
                                 />
                                 <Legend />
