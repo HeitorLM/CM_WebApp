@@ -11,7 +11,8 @@ import {
     LikeOutlined,
     CalendarOutlined,
     ClockCircleFilled,
-    EnvironmentOutlined
+    EnvironmentOutlined,
+    HourglassOutlined
 } from '@ant-design/icons';
 import { OccurrenceDB } from '../types';
 
@@ -288,7 +289,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
             </Card>
 
             {/* 7. Tendência Temporal */}
-            <Card title="Tendência Temporal" style={{ marginBottom: 24 }}>
+            <Card
+                title="Tendência Temporal"
+                style={{ marginBottom: 24 }}
+                extra={<HourglassOutlined />}
+            >
                 <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={timeSeriesData}>
                         <CartesianGrid strokeDasharray="3 3" />
