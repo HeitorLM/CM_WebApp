@@ -102,7 +102,8 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
     const summaryKPIs = {
         totalOccurrences: occurrences.length,
         avgReliability: occurrences.reduce((sum, occ) => sum + occ.reliability, 0) / occurrences.length,
-        totalThumbsUp: occurrences.reduce((sum, occ) => sum + (occ.nThumbsUp || 0), 0)
+        totalThumbsUp: occurrences.reduce((sum, occ) => sum + (occ.nThumbsUp || 0), 0),
+        avgConfidence: occurrences.reduce((sum, occ) => sum + occ.confidence, 0) / occurrences.length // Nova métrica
     };
 
 
@@ -345,6 +346,15 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
                             <Statistic
                                 title="Confiabilidade Média"
                                 value={summaryKPIs.avgReliability.toFixed(2)}
+                                prefix={<SafetyOutlined />}
+                            />
+                        </Card>
+                    </Col>
+                    <Col span={6}>
+                        <Card>
+                            <Statistic
+                                title="Confiança Média"
+                                value={summaryKPIs.avgConfidence.toFixed(2)}
                                 prefix={<SafetyOutlined />}
                             />
                         </Card>
