@@ -220,7 +220,7 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
                             label={{ value: 'Número de Ocorrências', angle: -90, position: 'insideLeft' }}
                         />
                         <Tooltip
-                            formatter={(value) => [`${value} ocorrências`, 'Quantidade']}
+                            formatter={(value) => [`${value} ocorrências`]}
                             labelFormatter={(hour) => `Hora: ${hour}:00`}
                         />
                         <Line
