@@ -13,14 +13,14 @@ React App:
              - Remover texto duplicado
 
             - Ocorrências por Dia da Semana
-             - Remover texto duplicado
-             - Explicitar porcentagem corretamente
+             ✔ Remover texto duplicado @done(25-07-17 23:42)
+             ✔ Explicitar porcentagem corretamente @done(25-07-17 23:42)
 
             - Tendência Temporal
-             - Adicionar ícone
+             ✔ Adicionar ícone @done(25-07-17 23:32)
 
             - Resumo estatístico
-             - Adicionar ícone
+             ✔ Adicionar ícone @done(25-07-17 23:32)
 
             - Arrumar CSS
              - Arrumar as cores do component dos gráficos
