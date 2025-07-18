@@ -12,7 +12,8 @@ import {
     CalendarOutlined,
     ClockCircleFilled,
     EnvironmentOutlined,
-    HourglassOutlined
+    HourglassOutlined,
+    FileTextOutlined
 } from '@ant-design/icons';
 import { OccurrenceDB } from '../types';
 
@@ -324,7 +325,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
             </Card>
 
             {/* 10. Dashboard Resumo com KPIs */}
-            <Card title="Resumo Estatístico" style={{ marginBottom: 24 }}>
+            <Card
+                title="Resumo Estatístico"
+                style={{ marginBottom: 24 }}
+                extra={< FileTextOutlined />}
+            >
                 <Row gutter={16}>
                     <Col span={6}>
                         <Card>
@@ -355,6 +360,6 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
                     </Col>
                 </Row>
             </Card>
-        </div>
+        </div >
     );
 };
