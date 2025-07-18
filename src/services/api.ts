@@ -2,8 +2,8 @@ import axios from 'axios';
 import { OccurrenceDB, LocationDB, UsersEntity } from '../types';
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL 
-        ? `http://${import.meta.env.VITE_API_BASE_URL}:${import.meta.env.VITE_API_PORT}` 
+    baseURL: import.meta.env.VITE_EXPRESS_BASE_URL 
+        ? `http://${import.meta.env.VITE_EXPRESS_BASE_URL}:${import.meta.env.VITE_API_PORT}` 
         : 'http://localhost:3000'
 });
 
