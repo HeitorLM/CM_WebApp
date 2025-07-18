@@ -20,7 +20,7 @@ const Dashboard: React.FC = () => {
     const savedTheme = localStorage.getItem('isDarkMode');
     return savedTheme ? JSON.parse(savedTheme) : true;
   });
-  const [activeInterval, setActiveInterval] = useState('12h');
+  const [activeInterval, setActiveInterval] = useState('');
   const [isHeatmap, setIsHeatmap] = useState(() => {
     const savedView = localStorage.getItem('isHeatmap');
     return savedView ? JSON.parse(savedView) : true;
