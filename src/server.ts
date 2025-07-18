@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
-import * as dotenv from "dotenv";
+import dotenv from "dotenv"
 
 import { fileURLToPath } from 'url';
 
@@ -30,5 +30,5 @@ app.get('*', (_req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://${BASE_URL}:${PORT}`);
+  console.log(`Server is running on ${BASE_URL}:${PORT}`);
 });
