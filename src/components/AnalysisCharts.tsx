@@ -344,7 +344,7 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
                     <Col span={6}>
                         <Card>
                             <Statistic
-                                title="Confiabilidade Média"
+                                title="Confiabilidade Média (5-10)"
                                 value={summaryKPIs.avgReliability.toFixed(2)}
                                 prefix={<SafetyOutlined />}
                             />
@@ -353,7 +353,7 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
                     <Col span={6}>
                         <Card>
                             <Statistic
-                                title="Confiança Média"
+                                title="Confiança Média (0-5)"
                                 value={summaryKPIs.avgConfidence.toFixed(2)}
                                 prefix={<SafetyOutlined />}
                             />
