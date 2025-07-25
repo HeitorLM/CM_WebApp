@@ -5,7 +5,7 @@ import {
     PieChart, Pie, Cell,
     LineChart, Line, Area
 } from 'recharts';
-import { Card, Col, Row, Statistic, Typography } from 'antd';
+import { Card, Col, Row, Statistic, Typography, Select } from 'antd';
 import {
     SafetyOutlined,
     LikeOutlined,
@@ -18,6 +18,7 @@ import {
 import { OccurrenceDB } from '../types';
 
 const { Title } = Typography;
+const { Option } = Select;
 
 // Cores para os gráficos
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D'];
@@ -37,8 +38,28 @@ interface AnalysisChartsProps {
 }
 
 export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) => {
+    // Estado para o filtro de locationId
+    const [selectedLocationId, setSelectedLocationId] = React.useState<string | null>(null);
+
+    // Obter todos os locationIds únicos para o dropdown
+    const locationIds = React.useMemo(() => {
+        const ids = new Set<string>();
+        occurrences.forEach(occ => {
+            if (occ.locationId) {
+                ids.add(occ.locationId.toString());
+            }
+        });
+        return Array.from(ids);
+    }, [occurrences]);
+
+    // Filtrar ocorrências com base no locationId selecionado
+    const filteredOccurrences = React.useMemo(() => {
+        if (!selectedLocationId) return occurrences;
+        return occurrences.filter(occ => occ.locationId?.toString() === selectedLocationId);
+    }, [occurrences, selectedLocationId]);
+
     // 1. Top 10 Ocorrências Mais Curtidas
-    const topLikedOccurrences = [...occurrences]
+    const topLikedOccurrences = [...filteredOccurrences]
         .sort((a, b) => (b.nThumbsUp || 0) - (a.nThumbsUp || 0))
         .slice(0, 10)
         .map(occ => ({
@@ -49,15 +70,15 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
         }));
 
     // 2. Distribuição de Confiabilidade e Confiança
-    const reliabilityConfidenceData = occurrences.map(occ => ({
+    const reliabilityConfidenceData = filteredOccurrences.map(occ => ({
         id: occ.id,
-        reliability: occ.reliability, // Convertendo para escala 0-10
+        reliability: occ.reliability,
         confidence: occ.confidence
     }));
 
     // 3. Ocorrências por Hora do Dia
     const hourlyData = Array.from({ length: 24 }, (_, hour) => {
-        const hourCount = occurrences.filter(
+        const hourCount = filteredOccurrences.filter(
             occ => getHourFromTimestamp(occ.timeStamp) === hour
         ).length;
         return { hour, count: hourCount };
@@ -66,7 +87,7 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
     // 4. Ocorrências por Dia da Semana
     const weekdayData = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
         .map(day => {
-            const dayCount = occurrences.filter(
+            const dayCount = filteredOccurrences.filter(
                 occ => getDayOfWeekFromTimestamp(occ.timeStamp) === day
             ).length;
             return { day, count: dayCount };
@@ -74,7 +95,7 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
 
     // 7. Tendência Temporal (Série Temporal)
     const timeSeriesData = React.useMemo(() => {
-        const dailyData = occurrences.reduce((acc, curr) => {
+        const dailyData = filteredOccurrences.reduce((acc, curr) => {
             const date = new Date(curr.timeStamp).toISOString().split('T')[0];
             if (!acc[date]) {
                 acc[date] = {
@@ -96,19 +117,36 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
                 avgReliability: item.avgReliability / item.count
             }))
             .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    }, [occurrences]);
+    }, [filteredOccurrences]);
 
     // 10. Dashboard Resumo com KPIs
     const summaryKPIs = {
-        totalOccurrences: occurrences.length,
-        avgReliability: occurrences.reduce((sum, occ) => sum + occ.reliability, 0) / occurrences.length,
-        totalThumbsUp: occurrences.reduce((sum, occ) => sum + (occ.nThumbsUp || 0), 0),
-        avgConfidence: occurrences.reduce((sum, occ) => sum + occ.confidence, 0) / occurrences.length // Nova métrica
+        totalOccurrences: filteredOccurrences.length,
+        avgReliability: filteredOccurrences.reduce((sum, occ) => sum + occ.reliability, 0) / filteredOccurrences.length || 0,
+        totalThumbsUp: filteredOccurrences.reduce((sum, occ) => sum + (occ.nThumbsUp || 0), 0),
+        avgConfidence: filteredOccurrences.reduce((sum, occ) => sum + occ.confidence, 0) / filteredOccurrences.length || 0
     };
-
 
     return (
         <div style={{ padding: '20px' }}>
+            {/* Filtro por locationId */}
+            <Card style={{ marginBottom: 24 }}>
+                <Title level={5}>Filtrar por Localização</Title>
+                <Select
+                    style={{ width: '100%' }}
+                    placeholder="Selecione uma localização"
+                    allowClear
+                    onChange={(value: string | null) => setSelectedLocationId(value)}
+                >
+                    <Option value={null}>Todas as localizações</Option>
+                    {locationIds.map(locationId => (
+                        <Option key={locationId} value={locationId}>
+                            {locationId}
+                        </Option>
+                    ))}
+                </Select>
+            </Card>
+
             {/* Seção 1: Top 10 Ocorrências Mais Curtidas */}
             <Card
                 title="Top 10 Ocorrências Mais Curtidas"
