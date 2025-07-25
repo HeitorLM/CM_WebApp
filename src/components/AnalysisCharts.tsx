@@ -96,18 +96,21 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
     // 7. Tendência Temporal (Série Temporal)
     const timeSeriesData = React.useMemo(() => {
         const dailyData = filteredOccurrences.reduce((acc, curr) => {
-            const date = new Date(curr.timeStamp).toISOString().split('T')[0];
-            if (!acc[date]) {
-                acc[date] = {
-                    date,
-                    count: 0,
-                    avgReliability: 0,
-                    totalThumbsUp: 0
-                };
+            const dateObj = new Date(curr.timeStamp);
+            const date = !isNaN(dateObj.getTime()) ? dateObj.toISOString().split('T')[0] : '';
+            if (date) {
+                if (!acc[date]) {
+                    acc[date] = {
+                        date,
+                        count: 0,
+                        avgReliability: 0,
+                        totalThumbsUp: 0
+                    };
+                }
+                acc[date].count++;
+                acc[date].avgReliability += curr.reliability;
+                acc[date].totalThumbsUp += curr.nThumbsUp || 0;
             }
-            acc[date].count++;
-            acc[date].avgReliability += curr.reliability;
-            acc[date].totalThumbsUp += curr.nThumbsUp || 0;
             return acc;
         }, {} as Record<string, { date: string; count: number; avgReliability: number; totalThumbsUp: number }>);
 
