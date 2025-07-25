@@ -46,7 +46,7 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
         const ids = new Set<string>();
         occurrences.forEach(occ => {
             if (occ.locationId) {
-                ids.add(occ.locationId.toString());
+                ids.add(`${occ.locationId} - ${occ.name}`);
             }
         });
         return Array.from(ids);
