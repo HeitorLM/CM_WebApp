@@ -4,8 +4,9 @@ React App:
         ✔ Adicionar gráficos de linha @done(25-07-16 19:08)
         ✔ Adicionar gráficos de pizza @done(25-07-16 19:08)
 
-        ☐ Inserir dropdown para selecionar o local da ocorrência
+        ✔ Inserir dropdown para selecionar o local da ocorrência @done(25-07-25 19:26)
             - Irá filtrar os dados dos gráficos
+            - Retornar o nome da localização do banco de dados e exibir no dropdown
 
         - TO FIX:
             - Top 10 Ocorrências Mais Curtidas
