@@ -43,20 +43,21 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
 
     // Obter todos os locationIds únicos para o dropdown com seus respectivos nomes
     const locationOptions = React.useMemo(() => {
-        const locationMap = new Map<number, string>();
+        const locationMap = new Map<number, { name: string; count: number }>();
 
         occurrences.forEach(occ => {
-            if (occ.locationId && !locationMap.has(occ.locationId)) {
-                // Usar o nome da ocorrência ou um valor padrão se não existir
-                const locationName = occ.locationName || `Localização ${occ.locationId}`;
-                locationMap.set(occ.locationId, locationName);
+            if (occ.locationId) {
+                if (!locationMap.has(occ.locationId)) {
+                    const locationName = occ.locationName || `Localização ${occ.locationId}`;
+                    locationMap.set(occ.locationId, { name: locationName, count: 0 });
+                }
+                locationMap.get(occ.locationId)!.count++;
             }
         });
 
-        // Converter para array de opções no formato {value, label}
-        const options = Array.from(locationMap).map(([id, name]) => ({
+        const options = Array.from(locationMap).map(([id, { name, count }]) => ({
             value: id.toString(),
-            label: name
+            label: `${name} (${count} ocorrências)`
         }));
 
         // Adicionar a opção de "Todas as localizações"
