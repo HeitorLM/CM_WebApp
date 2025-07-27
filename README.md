@@ -42,4 +42,4 @@ O **Geo Dashboard** é uma aplicação React que fornece uma visualização em t
 ## 📜 Licença
 Este projeto está licenciado sob a MIT License.
 
-**Desenvolvido por HeitorLM**
+**Desenvolvido com 💖 por HeitorLM**
