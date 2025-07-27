@@ -56,7 +56,7 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
         // Converter para array de opções no formato {value, label}
         const options = Array.from(locationMap).map(([id, name]) => ({
             value: id.toString(),
-            label: `${id} - ${name}`
+            label: name
         }));
 
         // Adicionar a opção de "Todas as localizações"
