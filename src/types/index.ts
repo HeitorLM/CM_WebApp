@@ -19,6 +19,7 @@ export interface OccurrenceDB {
     locLatitude?: number | null;
     locLongitude?: number | null;
     timeStamp: number;
+    locationName: string;
 }
 export interface LocationDB {
     locationId: number;
