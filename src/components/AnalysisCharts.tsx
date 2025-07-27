@@ -55,10 +55,13 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
             }
         });
 
-        const options = Array.from(locationMap).map(([id, { name, count }]) => ({
-            value: id.toString(),
-            label: `${name} (${count} ocorrências)`
-        }));
+        const options = Array.from(locationMap)
+            .map(([id, { name, count }]) => ({
+                value: id.toString(),
+                label: `${name} (${count} ocorrências)`,
+                count
+            }))
+            .sort((a, b) => b.count - a.count); // Ordenar por quantidade de ocorrências
 
         // Adicionar a opção de "Todas as localizações"
         return [{ value: null, label: "Todas as localizações" }, ...options];
