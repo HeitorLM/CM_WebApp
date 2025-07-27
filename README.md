@@ -24,8 +24,6 @@ O **Geo Dashboard** é uma aplicação React que fornece uma visualização em t
   - 🛡️ TypeScript para tipagem estática
   - 🔑 dotenv para gerenciamento de variáveis de ambiente
 
-## 📂 Estrutura do Projeto
-
 
 ## 🖼️ Imagens do Projeto
 
