@@ -41,21 +41,31 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
     // Estado para o filtro de locationId
     const [selectedLocationId, setSelectedLocationId] = React.useState<string | null>(null);
 
-    // Obter todos os locationIds únicos para o dropdown
-    const locationIds = React.useMemo(() => {
-        const ids = new Set<string>();
+    // Obter todos os locationIds únicos para o dropdown com seus respectivos nomes
+    const locationOptions = React.useMemo(() => {
+        const locationMap = new Map<number, string>();
+
         occurrences.forEach(occ => {
-            if (occ.locationId) {
-                ids.add(`${occ.locationId} - ${occ.name}`);
+            if (occ.locationId && !locationMap.has(occ.locationId)) {
+                // Usar o nome da ocorrência ou um valor padrão se não existir
+                const locationName = occ.locationName || `Localização ${occ.locationId}`;
+                locationMap.set(occ.locationId, locationName);
             }
         });
-        return Array.from(ids);
+
+        // Converter para array de opções no formato {value, label}
+        return Array.from(locationMap).map(([id, name]) => ({
+            value: id.toString(),
+            label: `${id} - ${name}`
+        }));
     }, [occurrences]);
 
     // Filtrar ocorrências com base no locationId selecionado
     const filteredOccurrences = React.useMemo(() => {
         if (!selectedLocationId) return occurrences;
-        return occurrences.filter(occ => occ.locationId?.toString() === selectedLocationId);
+        return occurrences.filter(occ =>
+            occ.locationId?.toString() === selectedLocationId
+        );
     }, [occurrences, selectedLocationId]);
 
     // 1. Top 10 Ocorrências Mais Curtidas
@@ -140,14 +150,13 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
                     placeholder="Selecione uma localização"
                     allowClear
                     onChange={(value: string | null) => setSelectedLocationId(value)}
-                >
-                    <Option value={null}>Todas as localizações</Option>
-                    {locationIds.map(locationId => (
-                        <Option key={locationId} value={locationId}>
-                            {locationId}
-                        </Option>
-                    ))}
-                </Select>
+                    options={locationOptions}
+                    optionFilterProp="label"
+                    showSearch
+                    filterOption={(input, option) =>
+                        option?.label.toLowerCase().includes(input.toLowerCase()) ?? false
+                    }
+                />
             </Card>
 
             {/* Seção 1: Top 10 Ocorrências Mais Curtidas */}
