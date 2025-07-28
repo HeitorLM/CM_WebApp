@@ -11,6 +11,10 @@ React App:
         - Adicionar ícone para mouseover com explicação dos gráficos
             - Ao lado dos ícones dos gráficos
 
+        - Modularizar AnalysisCharts.tsx
+            - Criar componentes para cada gráfico
+            - Criar componente para o dropdown de locais
+
         - TO FIX:
             - Top 10 Ocorrências Mais Curtidas
              ✔ Remover type e explicitar rua @done(25-07-16 19:16)
@@ -34,10 +38,9 @@ React App:
              ✔ Ajustar o tab pane @done(25-07-16 19:49)
               - Deixar no estilo bootstrap (?)
 
-        - Alterar README.md
-            - Adicionar instruções de como rodar o projeto
-            - Adicionar infos sobre o projeto
-            - Adicionar imagens do projeto
+        ✔ Alterar README.md @done(25-07-28 01:52)
+            ✔ Adicionar infos sobre o projeto @done(25-07-28 01:53)
+            ✔ Adicionar imagens do projeto @done(25-07-28 01:53)
         ✔ Remover CRA e implementar Vite @done(25-07-16 19:06)
 
     ✔ Verificar CSS @done(25-01-08 04:03)
