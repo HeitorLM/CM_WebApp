@@ -5,7 +5,7 @@ import {
     PieChart, Pie, Cell,
     LineChart, Line, Area
 } from 'recharts';
-import { Card, Col, Row, Statistic, Typography, Select } from 'antd';
+import { Card, Col, Row, Statistic, Typography, Select, Tooltip as AntdTooltip } from 'antd';
 import {
     SafetyOutlined,
     LikeOutlined,
@@ -170,7 +170,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
             <Card
                 title="Top 10 Ocorrências Mais Curtidas"
                 style={{ marginBottom: 24 }}
-                extra={<LikeOutlined />}
+                extra={
+                    <AntdTooltip title="Exibe as 10 ocorrências com maior número de curtidas.">
+                        <LikeOutlined />
+                    </AntdTooltip>
+                }
             >
                 <ResponsiveContainer width="100%" height={400}>
                     <BarChart
@@ -206,7 +210,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
             <Card
                 title="Distribuição de Confiabilidade e Confiança"
                 style={{ marginBottom: 24 }}
-                extra={<SafetyOutlined />}
+                extra={
+                    <AntdTooltip title="Mostra a distribuição das notas de confiabilidade (5-10) e confiança (0-5) das ocorrências.">
+                        <SafetyOutlined />
+                    </AntdTooltip>
+                }
             >
                 <Row gutter={16}>
                     <Col span={12}>
@@ -264,7 +272,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
             <Card
                 title="Ocorrências por Hora do Dia"
                 style={{ marginBottom: 24 }}
-                extra={<ClockCircleFilled />}
+                extra={
+                    <AntdTooltip title="Distribuição das ocorrências ao longo das horas do dia.">
+                        <ClockCircleFilled />
+                    </AntdTooltip>
+                }
             >
                 <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={hourlyData}>
@@ -298,7 +310,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
             <Card
                 title="Ocorrências por Dia da Semana"
                 style={{ marginBottom: 24 }}
-                extra={<CalendarOutlined />}
+                extra={
+                    <AntdTooltip title="Mostra em quais dias da semana ocorrem mais registros.">
+                        <CalendarOutlined />
+                    </AntdTooltip>
+                }
             >
                 <Row gutter={16}>
                     <Col span={12}>
@@ -353,7 +369,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
             <Card
                 title="Tendência Temporal"
                 style={{ marginBottom: 24 }}
-                extra={<HourglassOutlined />}
+                extra={
+                    <AntdTooltip title="Evolução diária do número de ocorrências e da confiabilidade média.">
+                        <HourglassOutlined />
+                    </AntdTooltip>
+                }
             >
                 <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={timeSeriesData}>
@@ -388,7 +408,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
             <Card
                 title="Resumo Estatístico"
                 style={{ marginBottom: 24 }}
-                extra={< FileTextOutlined />}
+                extra={
+                    <AntdTooltip title="Indicadores-chave de desempenho das ocorrências filtradas.">
+                        <FileTextOutlined />
+                    </AntdTooltip>
+                }
             >
                 <Row gutter={16}>
                     <Col span={6}>
