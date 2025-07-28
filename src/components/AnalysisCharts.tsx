@@ -168,7 +168,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
 
             {/* Seção 1: Top 10 Ocorrências Mais Curtidas */}
             <Card
-                title="Top 10 Ocorrências Mais Curtidas"
+                title={
+                    <AntdTooltip title="Exibe as 10 ocorrências com maior número de curtidas.">
+                        <span>Top 10 Ocorrências Mais Curtidas</span>
+                    </AntdTooltip>
+                }
                 style={{ marginBottom: 24 }}
                 extra={
                     <AntdTooltip title="Exibe as 10 ocorrências com maior número de curtidas.">
@@ -208,7 +212,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
 
             {/* Seção 2: Distribuição de Confiabilidade e Confiança */}
             <Card
-                title="Distribuição de Confiabilidade e Confiança"
+                title={
+                    <AntdTooltip title="Mostra a distribuição das notas de confiabilidade (5-10) e confiança (0-5) das ocorrências.">
+                        <span>Distribuição de Confiabilidade e Confiança</span>
+                    </AntdTooltip>
+                }
                 style={{ marginBottom: 24 }}
                 extra={
                     <AntdTooltip title="Mostra a distribuição das notas de confiabilidade (5-10) e confiança (0-5) das ocorrências.">
@@ -270,7 +278,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
 
             {/* Seção 3: Ocorrências por Hora do Dia */}
             <Card
-                title="Ocorrências por Hora do Dia"
+                title={
+                    <AntdTooltip title="Distribuição das ocorrências ao longo das horas do dia.">
+                        <span>Ocorrências por Hora do Dia</span>
+                    </AntdTooltip>
+                }
                 style={{ marginBottom: 24 }}
                 extra={
                     <AntdTooltip title="Distribuição das ocorrências ao longo das horas do dia.">
@@ -308,7 +320,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
 
             {/* Seção 4: Ocorrências por Dia da Semana */}
             <Card
-                title="Ocorrências por Dia da Semana"
+                title={
+                    <AntdTooltip title="Mostra em quais dias da semana ocorrem mais registros.">
+                        <span>Ocorrências por Dia da Semana</span>
+                    </AntdTooltip>
+                }
                 style={{ marginBottom: 24 }}
                 extra={
                     <AntdTooltip title="Mostra em quais dias da semana ocorrem mais registros.">
@@ -367,7 +383,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
 
             {/* 7. Tendência Temporal */}
             <Card
-                title="Tendência Temporal"
+                title={
+                    <AntdTooltip title="Evolução diária do número de ocorrências e da confiabilidade média.">
+                        <span>Tendência Temporal</span>
+                    </AntdTooltip>
+                }
                 style={{ marginBottom: 24 }}
                 extra={
                     <AntdTooltip title="Evolução diária do número de ocorrências e da confiabilidade média.">
@@ -406,7 +426,11 @@ export const AnalysisCharts: React.FC<AnalysisChartsProps> = ({ occurrences }) =
 
             {/* 10. Dashboard Resumo com KPIs */}
             <Card
-                title="Resumo Estatístico"
+                title={
+                    <AntdTooltip title="Indicadores-chave de desempenho das ocorrências filtradas.">
+                        <span>Resumo Estatístico</span>
+                    </AntdTooltip>
+                }
                 style={{ marginBottom: 24 }}
                 extra={
                     <AntdTooltip title="Indicadores-chave de desempenho das ocorrências filtradas.">
