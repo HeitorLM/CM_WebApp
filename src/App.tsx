@@ -4,8 +4,10 @@ import 'leaflet/dist/leaflet.css';
 import {
   Sun as SunIcon,
   Moon as MoonIcon,
-  Bot as BotIcon
+  Bot as BotIcon,
+  HelpCircle
 } from 'lucide-react';
+import { Modal } from 'antd';
 
 import { useOccurrences } from './hooks/useOccurrences';
 import { MapMarker } from './components/MapMarker';
@@ -28,6 +30,7 @@ const Dashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState('map'); // Novo estado para alternar entre abas
   const mapRef = useRef<HTMLDivElement>(null); // Referência para o mapa
   const chartsRef = useRef<HTMLDivElement>(null); // Referência para os gráficos
+  const [isHelpModalOpen, setIsHelpModalOpen] = useState(false);
 
   useEffect(() => {
     if (isDarkMode) {
@@ -91,8 +94,47 @@ const Dashboard: React.FC = () => {
             {isDarkMode ? <MoonIcon /> : <SunIcon />}
             <span>{isDarkMode ? 'Tema Escuro' : 'Tema Claro'}</span>
           </button>
+
+          <button
+            onClick={() => setIsHelpModalOpen(true)}
+            className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-full"
+            style={{ marginLeft: 0 }}
+          >
+            <HelpCircle style={{ marginRight: 4 }} />
+            <span>Ajuda/Sobre</span>
+          </button>
         </div>
       </div>
+
+      <Modal
+        title="Sobre o Geo Dashboard"
+        open={isHelpModalOpen}
+        onOk={() => setIsHelpModalOpen(false)}
+        onCancel={() => setIsHelpModalOpen(false)}
+        okText="Entendi"
+        cancelText="Fechar"
+      >
+        <p>
+          Esta aplicação tem como objetivo fornecer uma visualização interativa e analítica das ocorrências registradas em diferentes localizações.
+        </p>
+        <ul>
+          <li>
+            <b>Mapa:</b> Visualize ocorrências em tempo real, alternando entre visualização por marcadores ou por mapa de calor.
+          </li>
+          <li>
+            <b>Gráficos:</b> Analise estatísticas detalhadas sobre as ocorrências, como horários, dias da semana, confiabilidade e tendências.
+          </li>
+          <li>
+            <b>Filtros:</b> Utilize filtros para refinar a análise por localização ou intervalo de tempo.
+          </li>
+          <li>
+            <b>Bot:</b> Interaja com o bot para registrar novas ocorrências diretamente pelo Telegram.
+          </li>
+        </ul>
+        <p>
+          O objetivo é facilitar o monitoramento, análise e tomada de decisão baseada em dados geográficos e temporais.
+        </p>
+      </Modal>
 
       <div className="stats-grid">
         <div className="stat-card">
