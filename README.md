@@ -2,6 +2,11 @@
 
 O **Geo Dashboard** é uma aplicação React que fornece uma visualização em tempo real de ocorrências e localizações, utilizando mapas interativos, gráficos analíticos e integração com APIs para exibir dados dinâmicos.
 
+
+**🗺️ Mapa Interativo**
+
+![](./images/map.jpg)
+
 ## ✨ Funcionalidades
 
 - 🗺️ **Mapa Interativo**: Visualize ocorrências em um mapa com suporte a heatmap e marcadores.
@@ -26,10 +31,6 @@ O **Geo Dashboard** é uma aplicação React que fornece uma visualização em t
 
 
 ## 🖼️ Imagens do Projeto
-
-**🗺️ Mapa Interativo**
-
-![](./images/map.jpg)
 
 **📋 Dashboard Principal**
 
